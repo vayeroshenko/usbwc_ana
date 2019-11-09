@@ -16,7 +16,7 @@ public :
   
 private :
   
-  static const Int_t USBWCnChannels = 2;
+  static const Int_t USBWCnChannels = 8;
   static const Int_t USBWCnSamplesPoint = 1024;
   
   TTree          *fChain;
