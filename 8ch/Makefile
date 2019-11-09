@@ -25,13 +25,10 @@ OUTLIB	      = ./obj/
 
 #----------------------------------------------------#
 
-all: convertUSBWC2root2ChannelsBin  convertUSBWCMeas2root8ChannelsBin  runL1Bin runMeasures
+all: convertUSBWC2root8ChannelsBin  convertUSBWCMeas2root8ChannelsBin  runL1Bin
 
 runL1Bin: runL1Bin.cpp obj/wfSim.o obj/waveformSimple.o obj/anaL1Bin.o
 	g++ -o runL1Bin runL1Bin.cpp $(OUTLIB)*.o `root-config --cflags --glibs`
-
-runMeasures: runMeasures.cpp obj/wfSim.o obj/anaMeasures.o
-	g++ -o runMeasures runMeasures.cpp $(OUTLIB)*.o `root-config --cflags --glibs`
 
 obj/anaL1Bin.o: src/anaL1Bin.cpp src/anaL1Bin.hh
 	$(CXX) $(CXXFLAGS) -c -I. -o $(OUTLIB)anaL1Bin.o $<
@@ -48,8 +45,8 @@ obj/waveformSimple.o: wfSimulation/src/waveformSimple.cpp wfSimulation/src/wavef
 obj/waveform.o: wfSimulation/src/waveform.cpp wfSimulation/src/waveform.hh
 	$(CXX) $(CXXFLAGS) -c -I. -o $(OUTLIB)waveform.o $<
 
-convertUSBWC2root2ChannelsBin: convertUSBWC2root2ChannelsBin.cc
-	g++ -o convertUSBWC2root2ChannelsBin convertUSBWC2root2ChannelsBin.cc `root-config --cflags --glibs`
+convertUSBWC2root8ChannelsBin: convertUSBWC2root8ChannelsBin.cc
+	g++ -o convertUSBWC2root8ChannelsBin convertUSBWC2root8ChannelsBin.cc `root-config --cflags --glibs`
 
 convertUSBWCMeas2root8ChannelsBin: convertUSBWCMeas2root8ChannelsBin.cc
 	g++ -o convertUSBWCMeas2root8ChannelsBin convertUSBWCMeas2root8ChannelsBin.cc `root-config --cflags --glibs`
@@ -57,8 +54,7 @@ convertUSBWCMeas2root8ChannelsBin: convertUSBWCMeas2root8ChannelsBin.cc
 clean:
 	rm -f runL1
 	rm -f runL1Bin
-	rm -f runMeasures
-	rm -f convertUSBWC2root2ChannelsBin
+	rm -f convertUSBWC2root8ChannelsBin
 	rm -f convertUSBWCMeas2root8ChannelsBin
 	rm -f *~
 	rm -f src/*~
